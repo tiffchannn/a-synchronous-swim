@@ -1,3 +1,4 @@
+// import movement from './keypressHandler.js'
 (function() {
 
   const serverUrl = 'http://127.0.0.1:3000';
@@ -5,6 +6,32 @@
   //
   // TODO: build the swim command fetcher here
   //
+  const postSwimCommand = (move) => {
+    $.ajax({
+      type: 'POST',
+      data: move,
+      url: serverUrl,
+      success: () => {
+        console.log('Able to post the move!');
+      }
+    });
+  }
+
+  const getSwimCommand = () => {
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      success: (random) => {
+        console.log('Able to receive the data!');
+        SwimTeam.move(random); // add functionality here for swim command
+      }
+    });
+  }
+
+
+ console.log('pleaseeee work');
+
+
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
@@ -17,7 +44,7 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: 'FILL_ME_IN',
+      url: 'http://127.0.0.1:3000',
       cache: false,
       contentType: false,
       processData: false,
@@ -33,13 +60,6 @@
 
     var form = $('form .file')[0];
     if (form.files.length === 0) {
-      console.log('No file selected!');
-      return;
-    }
-
-    var file = form.files[0];
-    if (file.type !== 'image/jpeg') {
-      console.log('Not a jpg file!');
       return;
     }
 
@@ -47,3 +67,4 @@
   });
 
 })();
+
